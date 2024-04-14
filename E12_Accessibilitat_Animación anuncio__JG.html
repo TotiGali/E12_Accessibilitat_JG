@@ -1,0 +1,112 @@
+<!-- Autor:  Jordi Galí -->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E8_Keyframes_3_JG</title>
+    <link rel="stylesheet" href="E12_Accessibilitat_Animación anuncio_Style_JG.css" />
+  </head>
+
+  <body class="grid-container">
+    
+    <!-- Aqui va el header de la pàgina -->
+
+    <div class="grid-item item1">Slogan publicitàri del Rafa 
+      <h1>KYA dit que la tecnologia serveixi per mantenir-nos immòbils?</h1>
+    </div>
+    
+    <!-- Aqui va el cos de la pàgina -->
+
+    <div>
+      <div class="grid-item item2" aria-label="Skyline icon">Skyline
+        <div>
+          <img src="Imatges/skyline.png" alt="icona skyline">
+        </div>
+      </div>  
+        
+      <div class="grid-item item3" aria-label="car icon">Cotxe
+        <div class="traffic">
+          <div class="cotxe">
+          </div>
+          <div class="cotxe_back">
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-item item4" aria-label="person icon">Persona
+        <div class="persona">
+          <img src="Imatges/man.png" alt="icona persona">
+        </div>
+      </div>  
+    </div>
+
+    <!-- Aquí ve el footer -->
+
+    <div class="grid-item item5">Peu de pàgina
+      <hr>
+      <h3>©️ar-less Urbà 2029</h3>
+    
+
+     <!-- Botones para ajustar el tamaño del texto -->
+     <div class="container">Botons per aumentar i reduit el text
+      <button onclick="aumentarTexto()">Augmentar el Text</button>
+      <button onclick="disminuirTexto()">Disminuir el Text</button>
+     </div>
+  </div>
+
+  <script>
+      let tamañoTexto = 16; // Tamaño de texto base en píxeles
+
+      function aumentarTexto() {
+          tamañoTexto += 2;
+          document.body.style.fontSize = tamañoTexto + 'px';
+      }
+
+      function disminuirTexto() {
+          tamañoTexto -= 2;
+          document.body.style.fontSize = tamañoTexto + 'px';
+      }
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const gridItems = document.querySelectorAll('.grid-item');
+
+    let currentIndex = 0;
+
+    // Agregar evento de teclado para la navegación
+    document.addEventListener('keydown', function(event) {
+        const key = event.key;
+
+        switch(key) {
+            case 'ArrowUp':
+                currentIndex -= 2;
+                break;
+            case 'ArrowDown':
+                currentIndex += 2;
+                break;
+            case 'ArrowLeft':
+                currentIndex -= 1;
+                break;
+            case 'ArrowRight':
+                currentIndex += 1;
+                break;
+        }
+
+        // Limitar el índice dentro del rango de elementos
+        currentIndex = Math.min(Math.max(currentIndex, 0), gridItems.length - 1);
+
+        // Remover clase de enfoque de todos los elementos
+        gridItems.forEach(item => item.classList.remove('focused'));
+
+        // Agregar clase de enfoque al elemento actual
+        gridItems[currentIndex].classList.add('focused');
+    });
+  });
+  </script>
+
+  </body>
+</html>
